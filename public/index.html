@@ -740,7 +740,7 @@ function renderRecs() {
         <div class="rec-match-pct">${r.match.overall}% match</div>
       </div>
       <div class="rec-actions">
-        <button class="play-btn" onclick="openPlay('${escAttr(r.title)}','${escAttr(r.artist)}')" title="Play on YouTube">
+        <button class="play-btn" onclick="openPlayByIndex(${i})" title="Play on YouTube">
           <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </button>
         <button class="fav-btn ${isFav?'saved':''}" id="fav-row-${i}" onclick="toggleFav(${i},this)">
@@ -821,7 +821,7 @@ function renderFavs() {
         <div class="rec-artist-name">${escHtml(f.artist)}</div>
       </div>
       <div class="rec-actions">
-        <button class="play-btn" onclick="openPlay('${escAttr(f.title)}','${escAttr(f.artist)}')">
+        <button class="play-btn" onclick="openFavPlay(${i})">
           <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </button>
         <button class="fav-btn saved" onclick="removeFav(${i},this)">
@@ -948,6 +948,14 @@ function handleModalClick(e) {
   if(e.target===document.getElementById('statsModal')) closeSheet();
 }
 
+function openPlayByIndex(i) {
+  const r = currentRecs[i];
+  if (r) window.open(youtubeURL(r.title, r.artist), '_blank');
+}
+function openFavPlay(i) {
+  const f = favorites[i];
+  if (f) window.open(youtubeURL(f.title, f.artist), '_blank');
+}
 function openPlay(title, artist) {
   window.open(youtubeURL(title,artist),'_blank');
 }
