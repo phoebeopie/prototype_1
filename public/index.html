@@ -965,4 +965,14 @@ function spotifyURL(t,a){ return `https://open.spotify.com/search/${encodeURICom
 function youtubeURL(t,a){ return `https://www.youtube.com/results?search_query=${encodeURIComponent(t+' '+a)}`; }
 
 // ── Utils ──
-function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').
+function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escAttr(s){ return String(s).replace(/'/g,"\\'"); }
+
+// ── Keyboard ──
+document.addEventListener('keydown', e => {
+  if(e.key==='Enter') doSearch();
+  if(e.key==='Escape') closeSheet();
+});
+</script>
+</body>
+</html>
